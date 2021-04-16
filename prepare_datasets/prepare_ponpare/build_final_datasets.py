@@ -160,9 +160,15 @@ def build_train_valid_and_test():
         train_visits, valid_visits, test_visits, df_coupons_feat, df_user_feat
     )
 
-    train = pd.concat([train_purchases, train_visits]).sample(frac=1).reset_index(drop=True)
-    valid = pd.concat([valid_purchases, valid_visits]).sample(frac=1).reset_index(drop=True)
-    test = pd.concat([test_purchases, test_visits]).sample(frac=1).reset_index(drop=True)
+    train = (
+        pd.concat([train_purchases, train_visits]).sample(frac=1).reset_index(drop=True)
+    )
+    valid = (
+        pd.concat([valid_purchases, valid_visits]).sample(frac=1).reset_index(drop=True)
+    )
+    test = (
+        pd.concat([test_purchases, test_visits]).sample(frac=1).reset_index(drop=True)
+    )
 
     train.to_pickle(MAIN_PROCESSED_DATA_DIR / "ponpare_train.p")
     valid.to_pickle(MAIN_PROCESSED_DATA_DIR / "ponpare_val.p")

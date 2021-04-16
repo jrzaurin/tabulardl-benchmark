@@ -1,19 +1,18 @@
 import os
 import re
 import warnings
-from pathlib import Path
+from collections import Counter
 from functools import reduce
 from itertools import chain
-from collections import Counter
+from pathlib import Path
 
-import umap
+import gender_guesser.detector as gender
 import numpy as np
 import pandas as pd
-import gender_guesser.detector as gender
+import umap
+from sklearn.exceptions import NotFittedError
 from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.utils.validation import check_is_fitted
-from sklearn.exceptions import NotFittedError
-
 
 warnings.filterwarnings("ignore")
 

@@ -40,7 +40,9 @@ def days_to_present_col(df, present, date_column):
 
 def read_and_parse_dates():
 
-    df_users = pd.read_csv(TRANSLATED_DATA_DIR / "user_list.csv", parse_dates=["reg_date"])
+    df_users = pd.read_csv(
+        TRANSLATED_DATA_DIR / "user_list.csv", parse_dates=["reg_date"]
+    )
     df_coupons = pd.read_csv(
         TRANSLATED_DATA_DIR / "coupon_list_train.csv",
         parse_dates=["dispfrom", "dispend", "validfrom", "validend"],
@@ -74,5 +76,5 @@ def add_split_flag():
     add_flag_and_save_dset(df_coupons, "df_coupons", "dispfrom", present)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     add_split_flag()
