@@ -10,6 +10,9 @@ __pycache__*
 .ipynb_checkpoints
 Untitled*.ipynb
 
+# tmp file
+tmp.py
+
 # data related dirs
 raw_data/
 processed_data/

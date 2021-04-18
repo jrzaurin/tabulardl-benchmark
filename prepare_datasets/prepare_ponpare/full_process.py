@@ -5,6 +5,7 @@ from user_feat_engineering import user_feature_eng
 
 
 def full_process():
+    # after running translate
     add_split_flag()
     coupon_feature_eng()
     user_feature_eng()

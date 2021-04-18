@@ -7,7 +7,7 @@ from time import time
 import pandas as pd
 import torch
 from pytorch_widedeep import Trainer
-from pytorch_widedeep.callbacks import ModelCheckpoint, EarlyStopping, LRHistory
+from pytorch_widedeep.callbacks import EarlyStopping, LRHistory
 from pytorch_widedeep.metrics import Accuracy
 from pytorch_widedeep.models import TabMlp, WideDeep
 from pytorch_widedeep.preprocessing import TabPreprocessor
@@ -20,7 +20,7 @@ use_cuda = torch.cuda.is_available()
 
 ROOT_DIR = Path(os.getcwd())
 
-RESULTS_DIR = ROOT_DIR / "results/adult/"
+RESULTS_DIR = ROOT_DIR / "results/adult/tabmlp"
 if not RESULTS_DIR.is_dir():
     os.makedirs(RESULTS_DIR)
 
@@ -64,7 +64,6 @@ deeptabular = TabMlp(
     mlp_linear_first=args.mlp_linear_first,
     embed_input=prepare_deep.embeddings_input,
     embed_dropout=args.embed_dropout,
-    batchnorm_cont=args.batchnorm_cont,
 )
 model = WideDeep(deeptabular=deeptabular)
 
@@ -90,7 +89,7 @@ trainer = Trainer(
     objective="binary",
     optimizers=optimizers,
     lr_schedulers=lr_schedulers,
-    reduce_on="acc",
+    reducelronplateau_criterion=args.monitor.split("_")[-1],
     # callbacks=[early_stopping, model_checkpoint, LRHistory(n_epochs=args.n_epochs)],
     callbacks=[early_stopping, LRHistory(n_epochs=args.n_epochs)],
     metrics=[Accuracy],

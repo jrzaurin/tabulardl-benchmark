@@ -37,11 +37,6 @@ def parse_args():
     parser.add_argument(
         "--embed_dropout", type=float, default=0.1, help="embeddings dropout"
     )
-    parser.add_argument(
-        "--batchnorm_cont",
-        action="store_true",
-        help="If true BatchNorm will be applied to the continuous columns",
-    )
 
     # train/eval parameters
     parser.add_argument("--lr", type=float, default=0.001, help="Learning rate.")
@@ -64,7 +59,10 @@ def parse_args():
         help="Patience for early stopping",
     )
     parser.add_argument(
-        "--monitor", type=str, default="val_loss", help="(val_)loss or (val_)metric name to monitor"
+        "--monitor",
+        type=str,
+        default="val_loss",
+        help="(val_)loss or (val_)metric name to monitor",
     )
 
     # Optimizer parameters
@@ -79,7 +77,7 @@ def parse_args():
     parser.add_argument(
         "--lr_scheduler",
         type=str,
-        default="NoScheduler",
+        default="ReduceLROnPlateau",
         help="one of 'ReduceLROnPlateau', 'CyclicLR' or 'OneCycleLR', NoScheduler",
     )
     # ReduceLROnPlateau (rop) params

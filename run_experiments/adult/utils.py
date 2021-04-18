@@ -1,7 +1,7 @@
 import torch
 from pytorch_widedeep.optim import RAdam
-from torch.optim.lr_scheduler import CyclicLR  # type: ignore[attr-defined]
-from torch.optim.lr_scheduler import OneCycleLR, ReduceLROnPlateau
+from torch.optim.lr_scheduler import OneCycleLR  # type: ignore[attr-defined]
+from torch.optim.lr_scheduler import CyclicLR, ReduceLROnPlateau
 
 
 def steps_up_down(steps_per_epoch, n_epochs, pct_step_up, n_cycles):
