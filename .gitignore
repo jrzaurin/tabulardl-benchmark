@@ -17,6 +17,8 @@ tmp.py
 raw_data/
 processed_data/
 prepare_datasets/prepare_ponpare/data_products/
+run_experiments/models
+run_experiments/results
 
 # Unit Tests/Coverage
 .coverage

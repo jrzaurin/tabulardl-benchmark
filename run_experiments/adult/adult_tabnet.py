@@ -7,11 +7,11 @@ from time import time
 import pandas as pd
 import torch
 from pytorch_widedeep import Trainer
-from pytorch_widedeep.callbacks import EarlyStopping, LRHistory
+from pytorch_widedeep.callbacks import EarlyStopping
 from pytorch_widedeep.metrics import Accuracy
-from pytorch_widedeep.models import TabMlp, WideDeep
+from pytorch_widedeep.models import TabNet, WideDeep
 from pytorch_widedeep.preprocessing import TabPreprocessor
-from tabmlp_parser import parse_args
+from tabnet_parser import parse_args
 from utils import set_lr_scheduler, set_optimizer
 
 pd.options.display.max_columns = 100
@@ -22,7 +22,7 @@ ROOTDIR = Path("/home/ubuntu/Projects/tabulardl-benchmark")
 WORKDIR = Path(os.getcwd())
 
 PROCESSED_DATA_DIR = ROOTDIR / "processed_data/adult/"
-RESULTS_DIR = WORKDIR / "results/adult/tab"
+RESULTS_DIR = WORKDIR / "results/adult/tabnet"
 if not RESULTS_DIR.is_dir():
     os.makedirs(RESULTS_DIR)
 
@@ -48,23 +48,11 @@ y_valid = valid.target.values
 
 args = parse_args()
 
-if args.mlp_hidden_dims == "auto":
-    n_inp_dim = sum([e[2] for e in prepare_deep.embeddings_input])
-    mlp_hidden_dims = [4 * n_inp_dim, 2 * n_inp_dim]
-else:
-    mlp_hidden_dims = eval(args.mlp_hidden_dims)
-
-deeptabular = TabMlp(
-    column_idx=prepare_deep.column_idx,
-    mlp_hidden_dims=mlp_hidden_dims,
-    mlp_activation=args.mlp_activation,
-    mlp_dropout=args.mlp_dropout,
-    mlp_batchnorm=args.mlp_batchnorm,
-    mlp_batchnorm_last=args.mlp_batchnorm_last,
-    mlp_linear_first=args.mlp_linear_first,
+deeptabular = TabNet(
     embed_input=prepare_deep.embeddings_input,
-    embed_dropout=args.embed_dropout,
+    column_idx=prepare_deep.column_idx,
 )
+
 model = WideDeep(deeptabular=deeptabular)
 
 optimizers = set_optimizer(model, args)
@@ -76,13 +64,6 @@ early_stopping = EarlyStopping(
     min_delta=args.early_stop_delta,
     patience=args.early_stop_patience,
 )
-# model_checkpoint = ModelCheckpoint(
-#     filepath="models/adult_tabmlp_model",
-#     monitor=args.monitor,
-#     save_best_only=True,
-#     verbose=1,
-#     max_save=1,
-# )
 
 trainer = Trainer(
     model,
@@ -90,9 +71,9 @@ trainer = Trainer(
     optimizers=optimizers,
     lr_schedulers=lr_schedulers,
     reducelronplateau_criterion=args.monitor.split("_")[-1],
-    # callbacks=[early_stopping, model_checkpoint, LRHistory(n_epochs=args.n_epochs)],
-    callbacks=[early_stopping, LRHistory(n_epochs=args.n_epochs)],
+    callbacks=[early_stopping],
     metrics=[Accuracy],
+    lambda_sparse=args.lambda_sparse,
 )
 
 start = time()
@@ -107,7 +88,7 @@ runtime = time() - start
 
 if args.save_results:
     suffix = str(datetime.now()).replace(" ", "_").split(".")[:-1][0]
-    filename = "_".join(["adult_tabmlp", suffix]) + ".p"
+    filename = "_".join(["adult_tab", suffix]) + ".p"
     results_d = {}
     results_d["args"] = args.__dict__
     results_d["early_stopping"] = early_stopping

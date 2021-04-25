@@ -18,13 +18,13 @@ pd.options.display.max_columns = 100
 
 use_cuda = torch.cuda.is_available()
 
-ROOT_DIR = Path(os.getcwd())
+ROOTDIR = Path("/home/ubuntu/Projects/tabulardl-benchmark")
+WORKDIR = Path(os.getcwd())
 
-RESULTS_DIR = ROOT_DIR / "results/adult/tabresnet"
+PROCESSED_DATA_DIR = ROOTDIR / "processed_data/adult/"
+RESULTS_DIR = WORKDIR / "results/adult/tabresnet"
 if not RESULTS_DIR.is_dir():
     os.makedirs(RESULTS_DIR)
-
-PROCESSED_DATA_DIR = ROOT_DIR / "processed_data/adult/"
 
 train = pd.read_pickle(PROCESSED_DATA_DIR / "adult_train.p")
 valid = pd.read_pickle(PROCESSED_DATA_DIR / "adult_val.p")
