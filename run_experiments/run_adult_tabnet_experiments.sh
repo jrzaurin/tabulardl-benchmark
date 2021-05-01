@@ -1,38 +1,38 @@
-python adult/adult_tabnet.py --optimizer Adam --save_results
-python adult/adult_tabnet.py --optimizer AdamW --save_results
-python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --save_results
-python adult/adult_tabnet.py --optimizer RAdam --save_results
+# python adult/adult_tabnet.py --optimizer Adam --save_results
+# python adult/adult_tabnet.py --optimizer AdamW --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --save_results
 
-python adult/adult_tabnet.py --optimizer Adam --monitor val_acc --rop_mode max --save_results
-python adult/adult_tabnet.py --optimizer AdamW --monitor val_acc --rop_mode max --save_results
-python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --monitor val_acc --rop_mode max --save_results
-python adult/adult_tabnet.py --optimizer RAdam --monitor val_acc --rop_mode max --save_results
+# python adult/adult_tabnet.py --optimizer Adam --monitor val_acc --rop_mode max --save_results
+# python adult/adult_tabnet.py --optimizer AdamW --monitor val_acc --rop_mode max --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --monitor val_acc --rop_mode max --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --monitor val_acc --rop_mode max --save_results
 
-python adult/adult_tabnet.py --optimizer Adam --batch_size 512 --ghost_bn --virtual_batch_size 64 --save_results
-python adult/adult_tabnet.py --optimizer Adam --batch_size 1024 --ghost_bn --virtual_batch_size 64 --save_results
-python adult/adult_tabnet.py --optimizer Adam --batch_size 4096 --ghost_bn --virtual_batch_size 64 --save_results
-python adult/adult_tabnet.py --optimizer Adam --batch_size 512 --ghost_bn --virtual_batch_size 128 --save_results
-python adult/adult_tabnet.py --optimizer Adam --batch_size 1024 --ghost_bn --virtual_batch_size 128 --save_results
-python adult/adult_tabnet.py --optimizer Adam --batch_size 4096 --ghost_bn --virtual_batch_size 128 --save_results
-python adult/adult_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 64 --save_results
-python adult/adult_tabnet.py --optimizer AdamW --batch_size 1024 --ghost_bn --virtual_batch_size 64 --save_results
-python adult/adult_tabnet.py --optimizer AdamW --batch_size 4096 --ghost_bn --virtual_batch_size 64 --save_results
-python adult/adult_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 128 --save_results
-python adult/adult_tabnet.py --optimizer AdamW --batch_size 1024 --ghost_bn --virtual_batch_size 128 --save_results
-python adult/adult_tabnet.py --optimizer AdamW --batch_size 4096 --ghost_bn --virtual_batch_size 128 --save_results
-python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 512 --ghost_bn --virtual_batch_size 64 --save_results
-python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 1024 --ghost_bn --virtual_batch_size 64 --save_results
-python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 4096 --ghost_bn --virtual_batch_size 64 --save_results
-python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 512 --ghost_bn --virtual_batch_size 128 --save_results
-python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 1024 --ghost_bn --virtual_batch_size 128 --save_results
-python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 4096 --ghost_bn --virtual_batch_size 128 --save_results
+# python adult/adult_tabnet.py --optimizer Adam --batch_size 512 --ghost_bn --virtual_batch_size 64 --save_results
+# python adult/adult_tabnet.py --optimizer Adam --batch_size 1024 --ghost_bn --virtual_batch_size 64 --save_results
+# python adult/adult_tabnet.py --optimizer Adam --batch_size 4096 --ghost_bn --virtual_batch_size 64 --save_results
+# python adult/adult_tabnet.py --optimizer Adam --batch_size 512 --ghost_bn --virtual_batch_size 128 --save_results
+# python adult/adult_tabnet.py --optimizer Adam --batch_size 1024 --ghost_bn --virtual_batch_size 128 --save_results
+# python adult/adult_tabnet.py --optimizer Adam --batch_size 4096 --ghost_bn --virtual_batch_size 128 --save_results
+# python adult/adult_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 64 --save_results
+# python adult/adult_tabnet.py --optimizer AdamW --batch_size 1024 --ghost_bn --virtual_batch_size 64 --save_results
+# python adult/adult_tabnet.py --optimizer AdamW --batch_size 4096 --ghost_bn --virtual_batch_size 64 --save_results
+# python adult/adult_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 128 --save_results
+# python adult/adult_tabnet.py --optimizer AdamW --batch_size 1024 --ghost_bn --virtual_batch_size 128 --save_results
+# python adult/adult_tabnet.py --optimizer AdamW --batch_size 4096 --ghost_bn --virtual_batch_size 128 --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 512 --ghost_bn --virtual_batch_size 64 --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 1024 --ghost_bn --virtual_batch_size 64 --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 4096 --ghost_bn --virtual_batch_size 64 --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 512 --ghost_bn --virtual_batch_size 128 --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 1024 --ghost_bn --virtual_batch_size 128 --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --batch_size 4096 --ghost_bn --virtual_batch_size 128 --save_results
 
-python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --n_steps 7 --save_results
-python adult/adult_tabnet.py --optimizer AdamW --n_steps 7 --batch_size 512 --ghost_bn --virtual_batch_size 64 --save_results
-python adult/adult_tabnet.py --optimizer Adam --n_steps 7 --batch_size 512 --ghost_bn --virtual_batch_size 128 --save_results
-python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --dropout 0.2 --n_steps 7 --save_results
-python adult/adult_tabnet.py --optimizer AdamW --n_steps 7 --dropout 0.2 --batch_size 512 --ghost_bn --virtual_batch_size 64 --save_results
-python adult/adult_tabnet.py --optimizer Adam --n_steps 7 --dropout 0.2 --batch_size 512 --ghost_bn --virtual_batch_size 128 --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --n_steps 7 --save_results
+# python adult/adult_tabnet.py --optimizer AdamW --n_steps 7 --batch_size 512 --ghost_bn --virtual_batch_size 64 --save_results
+# python adult/adult_tabnet.py --optimizer Adam --n_steps 7 --batch_size 512 --ghost_bn --virtual_batch_size 128 --save_results
+# python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --dropout 0.2 --n_steps 7 --save_results
+# python adult/adult_tabnet.py --optimizer AdamW --n_steps 7 --dropout 0.2 --batch_size 512 --ghost_bn --virtual_batch_size 64 --save_results
+# python adult/adult_tabnet.py --optimizer Adam --n_steps 7 --dropout 0.2 --batch_size 512 --ghost_bn --virtual_batch_size 128 --save_results
 
 python adult/adult_tabnet.py --optimizer Adam --step_dim 32 --attn_dim 32 --save_results
 python adult/adult_tabnet.py --optimizer AdamW --step_dim 32 --attn_dim 32 --save_results
@@ -60,7 +60,6 @@ python adult/adult_tabnet.py --optimizer Adam --dropout 0.2 --step_dim 64 --attn
 python adult/adult_tabnet.py --optimizer AdamW --dropout 0.2 --step_dim 64 --attn_dim 64 --batch_size 512 --ghost_bn --virtual_batch_size 64 --save_results
 python adult/adult_tabnet.py --optimizer RAdam --lr 0.05 --dropout 0.2 --step_dim 64 --attn_dim 64 --batch_size 1024 --ghost_bn --virtual_batch_size 64 --save_results
 
-# I made a mistake and a few of these will be repeated
 python adult/adult_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 128 --momentum 0.25 --save_results
 python adult/adult_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 128 --momentum 0.50 --save_results
 python adult/adult_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 128 --momentum 0.75 --save_results

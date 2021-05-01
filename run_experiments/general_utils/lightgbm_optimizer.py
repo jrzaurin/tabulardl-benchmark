@@ -1,12 +1,12 @@
 import warnings
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import lightgbm as lgb
 import pandas as pd
 from hyperopt import Trials, fmin, hp, space_eval, tpe
 from lightgbm import Dataset as lgbDataset
 from optuna.integration.lightgbm import LightGBMTunerCV
-from sklearn.metrics import log_loss
+from sklearn.metrics import log_loss, mean_squared_error
 
 warnings.filterwarnings("ignore")
 
@@ -17,9 +17,13 @@ class LGBOptimizerHyperopt(object):
         objective: str = "binary",
         is_unbalance: bool = False,
         verbose: bool = False,
+        num_class: Optional[int] = None,
     ):
 
         self.objective = objective
+        if objective == "multiclass" and not num_class:
+            raise ValueError("num_class must be provided for multiclass problems")
+        self.num_class = num_class
         self.is_unbalance = is_unbalance
         self.verbose = verbose
         self.early_stop_dict: Dict = {}
@@ -59,7 +63,6 @@ class LGBOptimizerHyperopt(object):
         self.best.update(best)
 
     def get_objective(self, dtrain: lgbDataset, deval: lgbDataset):
-
         def objective(params: Dict[str, Any]) -> float:
 
             # hyperopt casts as float
@@ -76,6 +79,9 @@ class LGBOptimizerHyperopt(object):
             if self.objective != "regression":
                 params["is_unbalance"] = self.is_unbalance
 
+            if self.objective == "multiclass":
+                params["num_class"] = self.num_class
+
             model = lgb.train(
                 params,
                 dtrain,
@@ -84,7 +90,11 @@ class LGBOptimizerHyperopt(object):
                 verbose_eval=False,
             )
             preds = model.predict(deval.data)
-            score = log_loss(deval.label, preds)
+
+            if self.objective != "regression":
+                score = log_loss(deval.label, preds)
+            elif self.objective == "regression":
+                score = mean_squared_error(deval.label, preds)
 
             objective.i += 1  # type: ignore
 
@@ -120,16 +130,25 @@ class LGBOptimizerOptuna(object):
         objective: str = "binary",
         is_unbalance: bool = False,
         verbose: bool = False,
+        num_class: Optional[int] = None,
     ):
 
         self.objective = objective
+        if objective == "multiclass" and not num_class:
+            raise ValueError("num_class must be provided for multiclass problems")
+        self.num_class = num_class
         self.is_unbalance = is_unbalance
         self.verbose = verbose
         self.best: Dict[str, Any] = {}  # Best hyper-parameters
 
     def optimize(self, dtrain: lgbDataset, deval: lgbDataset):
         # Define the base parameters
-        params: Dict = {"objective": self.objective}  # , "metric": "rmse"}
+        if self.objective == "binary":
+            params: Dict = {"objective": self.objective}
+        elif self.objective == "multiclass":
+            params: Dict = {"objective": self.objective, "metric": "multi_logloss"}
+        elif self.objective == "regression":
+            params: Dict = {"objective": self.objective, "metric": "rmse"}
 
         if self.verbose:
             params["verbosity"] = 1
@@ -138,6 +157,9 @@ class LGBOptimizerOptuna(object):
 
         if self.objective != "regression":
             params["is_unbalance"] = self.is_unbalance
+
+        if self.objective == "multiclass":
+            params["num_class"] = self.num_class
 
         # Reformat the data for LightGBM cross validation method
         train_set = lgb.Dataset(

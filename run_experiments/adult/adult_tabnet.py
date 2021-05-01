@@ -49,10 +49,20 @@ y_valid = valid.target.values
 args = parse_args()
 
 deeptabular = TabNet(
-    embed_input=prepare_deep.embeddings_input,
     column_idx=prepare_deep.column_idx,
+    embed_input=prepare_deep.embeddings_input,
+    embed_dropout=args.embed_dropout,
+    n_steps=args.n_steps,
+    step_dim=args.step_dim,
+    attn_dim=args.attn_dim,
+    dropout=args.dropout,
+    n_glu_step_dependent=args.n_glu_step_dependent,
+    n_glu_shared=args.n_glu_shared,
+    ghost_bn=args.ghost_bn,
+    virtual_batch_size=args.virtual_batch_size,
+    momentum=args.momentum,
+    gamma=args.gamma,
 )
-
 model = WideDeep(deeptabular=deeptabular)
 
 optimizers = set_optimizer(model, args)

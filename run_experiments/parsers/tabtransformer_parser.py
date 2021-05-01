@@ -3,23 +3,84 @@ import argparse
 
 def parse_args():
 
-    parser = argparse.ArgumentParser(description="TabRenNet parameters")
+    parser = argparse.ArgumentParser(description="TabMlp parameters")
+
+    # data set
+    parser.add_argument(
+        "--bankm_dset",
+        type=str,
+        default="bank_marketing",
+        help="bank_marketing or bank_marketing_kaggle",
+    )
 
     # model parameters
     parser.add_argument(
-        "--blocks_dims",
-        type=str,
-        default="[100, 100, 100]",
-        help="if 'same' it will do [inp_dim, inp_dim, inp_dim]",
+        "--embed_dropout", type=float, default=0.0, help="embeddings dropout"
     )
     parser.add_argument(
-        "--blocks_dropout", type=float, default=0.1, help="Block's internal dropout"
+        "--full_embed_dropout",
+        action="store_true",
+        help="Boolean indicating if an entire embedding (i.e. the representation for one categorical"
+        " column) will be dropped in the batch",
     )
+    parser.add_argument(
+        "--shared_embed",
+        action="store_true",
+        help="Boolean indicating if part of the embeddings will be shared accross categorical cols",
+    )
+    parser.add_argument(
+        "--add_shared_embed",
+        action="store_true",
+        help="Boolean indicating if the shared embeddings strategy (see implementation for details)",
+    )
+    parser.add_argument(
+        "--frac_shared_embed",
+        type=int,
+        default=8,
+        help="dividing factor for the shared embeddings (e.g. 32/8)",
+    )
+    parser.add_argument(
+        "--input_dim",
+        type=int,
+        default=32,
+        help="embeddings input dim",
+    )
+    parser.add_argument(
+        "--n_heads",
+        type=int,
+        default=8,
+        help="number of attention heads",
+    )
+    parser.add_argument(
+        "--n_blocks",
+        type=int,
+        default=6,
+        help="number of transformer blocks",
+    )
+    parser.add_argument(
+        "--dropout",
+        type=float,
+        default=0.1,
+        help="Internal dropout for the TranformerEncoder and the MLP",
+    )
+    parser.add_argument(
+        "--ff_hidden_dim",
+        type=int,
+        default=None,
+        help="Hidden dimension of the ``FeedForward`` Layer",
+    )
+    parser.add_argument(
+        "--transformer_activation",
+        type=str,
+        default="relu",
+        help="one of relu, leaky_relu, gelu ",
+    )
+    # model parameters
     parser.add_argument(
         "--mlp_hidden_dims",
         type=str,
-        default="[100, 50]",
-        help="if auto it will do 4 x inp_dim -> 2 x inp_dim -> out",
+        default="None",
+        help="mlp hidden dims",
     )
     parser.add_argument(
         "--mlp_activation",
@@ -27,7 +88,6 @@ def parse_args():
         default="relu",
         help="one of relu, leaky_relu, gelu ",
     )
-    parser.add_argument("--mlp_dropout", type=float, default=0.1, help="mlp dropout")
     parser.add_argument(
         "--mlp_batchnorm",
         action="store_true",
@@ -43,8 +103,12 @@ def parse_args():
         action="store_true",
         help="Boolean indicating the order of the operations in the dense",
     )
+
+    # Wide model?
     parser.add_argument(
-        "--embed_dropout", type=float, default=0., help="embeddings dropout"
+        "--with_wide",
+        action="store_true",
+        help="Boolean indicating if a wide component will be present",
     )
 
     # train/eval parameters
@@ -99,7 +163,7 @@ def parse_args():
     parser.add_argument(
         "--rop_factor",
         type=float,
-        default=0.2,
+        default=0.1,
         help="Factor by which the learning rate will be reduced",
     )
     parser.add_argument(

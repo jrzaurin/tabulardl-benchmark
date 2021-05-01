@@ -3,22 +3,21 @@ import argparse
 
 def parse_args():
 
-    parser = argparse.ArgumentParser(description="TabRenNet parameters")
+    parser = argparse.ArgumentParser(description="TabMlp parameters")
+
+    # data set
+    parser.add_argument(
+        "--bankm_dset",
+        type=str,
+        default="bank_marketing",
+        help="bank_marketing or bank_marketing_kaggle",
+    )
 
     # model parameters
     parser.add_argument(
-        "--blocks_dims",
-        type=str,
-        default="[100, 100, 100]",
-        help="if 'same' it will do [inp_dim, inp_dim, inp_dim]",
-    )
-    parser.add_argument(
-        "--blocks_dropout", type=float, default=0.1, help="Block's internal dropout"
-    )
-    parser.add_argument(
         "--mlp_hidden_dims",
         type=str,
-        default="[100, 50]",
+        default="[200, 100]",
         help="if auto it will do 4 x inp_dim -> 2 x inp_dim -> out",
     )
     parser.add_argument(
@@ -52,6 +51,13 @@ def parse_args():
     parser.add_argument("--n_epochs", type=int, default=200, help="Number of epoch.")
     parser.add_argument("--batch_size", type=int, default=128, help="Batch size.")
     parser.add_argument("--weight_decay", type=float, default=0.0, help="l2 reg.")
+    parser.add_argument("--focal_loss", action="store_true", help="use focal loss")
+    parser.add_argument(
+        "--maxevals",
+        type=int,
+        default=60,
+        help="max number of evaluations/runs for the Focal Loss optimizer",
+    )
     parser.add_argument(
         "--eval_every", type=int, default=1, help="Evaluate every N epochs"
     )

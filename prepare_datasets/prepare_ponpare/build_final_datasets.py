@@ -170,6 +170,10 @@ def build_train_valid_and_test():
         pd.concat([test_purchases, test_visits]).sample(frac=1).reset_index(drop=True)
     )
 
+    train.drop(["dset_x", "dset_y"], axis=1, inplace=True)
+    valid.drop(["dset_x", "dset_y"], axis=1, inplace=True)
+    test.drop(["dset_x", "dset_y"], axis=1, inplace=True)
+
     train.to_pickle(MAIN_PROCESSED_DATA_DIR / "ponpare_train.p")
     valid.to_pickle(MAIN_PROCESSED_DATA_DIR / "ponpare_val.p")
     test.to_pickle(MAIN_PROCESSED_DATA_DIR / "ponpare_test.p")

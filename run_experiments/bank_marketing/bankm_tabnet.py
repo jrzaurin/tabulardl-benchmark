@@ -1,5 +1,6 @@
 import os
 import pickle
+import sys
 from datetime import datetime
 from pathlib import Path
 from time import time
@@ -8,36 +9,39 @@ import pandas as pd
 import torch
 from pytorch_widedeep import Trainer
 from pytorch_widedeep.callbacks import EarlyStopping, LRHistory
-from pytorch_widedeep.metrics import Accuracy
-from pytorch_widedeep.models import TabMlp, WideDeep
+from pytorch_widedeep.metrics import Accuracy, F1Score
+from pytorch_widedeep.models import TabNet, WideDeep
 from pytorch_widedeep.preprocessing import TabPreprocessor
-from tabmlp_parser import parse_args
-from utils import set_lr_scheduler, set_optimizer
+
+sys.path.append(
+    os.path.abspath("/home/ubuntu/Projects/tabulardl-benchmark/run_experiments")
+)  # isort:skipimport pickle
+from general_utils.utils import set_lr_scheduler, set_optimizer  # noqa: E402
+from parsers.tabnet_parser import parse_args  # noqa: E402
 
 pd.options.display.max_columns = 100
 
 use_cuda = torch.cuda.is_available()
 
+args = parse_args()
+
 ROOTDIR = Path("/home/ubuntu/Projects/tabulardl-benchmark")
 WORKDIR = Path(os.getcwd())
 
-PROCESSED_DATA_DIR = ROOTDIR / "processed_data/adult/"
-RESULTS_DIR = WORKDIR / "results/adult/tabmlp"
+PROCESSED_DATA_DIR = ROOTDIR / "/".join(["processed_data", args.bankm_dset])
+RESULTS_DIR = WORKDIR / "/".join(["results", args.bankm_dset, "tabnet"])
 if not RESULTS_DIR.is_dir():
     os.makedirs(RESULTS_DIR)
 
-train = pd.read_pickle(PROCESSED_DATA_DIR / "adult_train.p")
-valid = pd.read_pickle(PROCESSED_DATA_DIR / "adult_val.p")
-for df in [train, valid]:
-    df.drop("education_num", axis=1, inplace=True)
+train = pd.read_pickle(PROCESSED_DATA_DIR / "bankm_train.p")
+valid = pd.read_pickle(PROCESSED_DATA_DIR / "bankm_val.p")
+colnames = [c.replace(".", "_") for c in train.columns]
+train.columns = colnames
+valid.columns = colnames
 
-# 200 is rather arbitraty but one has to make a decision as to how to decide
-# if something will be represented as embeddings or continuous in a "kind-of"
-# automated way
-cat_embed_cols = []
-for col in train.columns:
-    if train[col].dtype == "O" or train[col].nunique() < 200 and col != "target":
-        cat_embed_cols.append(col)
+# All columns will be treated as categorical. The column with the highest
+# number of categories has 308
+cat_embed_cols = [c for c in train.columns if c != "target"]
 
 # all columns will be represented by embeddings
 prepare_deep = TabPreprocessor(embed_cols=cat_embed_cols)
@@ -48,22 +52,20 @@ y_valid = valid.target.values
 
 args = parse_args()
 
-if args.mlp_hidden_dims == "auto":
-    n_inp_dim = sum([e[2] for e in prepare_deep.embeddings_input])
-    mlp_hidden_dims = [4 * n_inp_dim, 2 * n_inp_dim]
-else:
-    mlp_hidden_dims = eval(args.mlp_hidden_dims)
-
-deeptabular = TabMlp(
+deeptabular = TabNet(
     column_idx=prepare_deep.column_idx,
-    mlp_hidden_dims=mlp_hidden_dims,
-    mlp_activation=args.mlp_activation,
-    mlp_dropout=args.mlp_dropout,
-    mlp_batchnorm=args.mlp_batchnorm,
-    mlp_batchnorm_last=args.mlp_batchnorm_last,
-    mlp_linear_first=args.mlp_linear_first,
     embed_input=prepare_deep.embeddings_input,
     embed_dropout=args.embed_dropout,
+    n_steps=args.n_steps,
+    step_dim=args.step_dim,
+    attn_dim=args.attn_dim,
+    dropout=args.dropout,
+    n_glu_step_dependent=args.n_glu_step_dependent,
+    n_glu_shared=args.n_glu_shared,
+    ghost_bn=args.ghost_bn,
+    virtual_batch_size=args.virtual_batch_size,
+    momentum=args.momentum,
+    gamma=args.gamma,
 )
 model = WideDeep(deeptabular=deeptabular)
 
@@ -76,13 +78,6 @@ early_stopping = EarlyStopping(
     min_delta=args.early_stop_delta,
     patience=args.early_stop_patience,
 )
-# model_checkpoint = ModelCheckpoint(
-#     filepath="models/adult_tabmlp_model",
-#     monitor=args.monitor,
-#     save_best_only=True,
-#     verbose=1,
-#     max_save=1,
-# )
 
 trainer = Trainer(
     model,
@@ -90,9 +85,8 @@ trainer = Trainer(
     optimizers=optimizers,
     lr_schedulers=lr_schedulers,
     reducelronplateau_criterion=args.monitor.split("_")[-1],
-    # callbacks=[early_stopping, model_checkpoint, LRHistory(n_epochs=args.n_epochs)],
     callbacks=[early_stopping, LRHistory(n_epochs=args.n_epochs)],
-    metrics=[Accuracy],
+    metrics=[Accuracy, F1Score],
 )
 
 start = time()
@@ -107,7 +101,7 @@ runtime = time() - start
 
 if args.save_results:
     suffix = str(datetime.now()).replace(" ", "_").split(".")[:-1][0]
-    filename = "_".join(["adult_tabmlp", suffix]) + ".p"
+    filename = "_".join(["adult_tabnet", suffix]) + ".p"
     results_d = {}
     results_d["args"] = args.__dict__
     results_d["early_stopping"] = early_stopping

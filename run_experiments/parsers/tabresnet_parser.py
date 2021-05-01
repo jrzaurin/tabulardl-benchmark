@@ -3,7 +3,15 @@ import argparse
 
 def parse_args():
 
-    parser = argparse.ArgumentParser(description="TabRenNet parameters")
+    parser = argparse.ArgumentParser(description="TabResNet parameters")
+
+    # data set
+    parser.add_argument(
+        "--bankm_dset",
+        type=str,
+        default="bank_marketing",
+        help="bank_marketing or bank_marketing_kaggle",
+    )
 
     # model parameters
     parser.add_argument(
@@ -18,7 +26,7 @@ def parse_args():
     parser.add_argument(
         "--mlp_hidden_dims",
         type=str,
-        default="[100, 50]",
+        default="[200, 100]",
         help="if auto it will do 4 x inp_dim -> 2 x inp_dim -> out",
     )
     parser.add_argument(
