@@ -121,7 +121,7 @@ runtime = time() - start
 
 if args.save_results:
     suffix = str(datetime.now()).replace(" ", "_").split(".")[:-1][0]
-    filename = "_".join(["adult_tabmlp", suffix]) + ".p"
+    filename = "_".join(["bankm_tabmlp", suffix]) + ".p"
     results_d = {}
     results_d["args"] = args.__dict__
     results_d["FLOptimizer"] = floptimizer if args.focal_loss else "NA"

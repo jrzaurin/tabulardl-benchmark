@@ -57,9 +57,10 @@ for df in [train, valid, test]:
     df.drop(drop_cols, axis=1, inplace=True)
 
 upper_trip_duration = train.target.quantile(0.99)
-train = train[train.target <= upper_trip_duration]
-valid = valid[valid.target <= upper_trip_duration]
-test = test[test.target <= upper_trip_duration]
+lower_trip_duration = 60  # a minute
+train = train[(train.target >= lower_trip_duration) & (train.target <= upper_trip_duration)]
+valid = valid[(valid.target >= lower_trip_duration) & (valid.target <= upper_trip_duration)]
+test = test[(test.target >= lower_trip_duration) & (test.target <= upper_trip_duration)]
 
 cat_cols = []
 for col in train.columns:

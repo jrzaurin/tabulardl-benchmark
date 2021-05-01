@@ -18,7 +18,7 @@ sys.path.append(
     os.path.abspath("/home/ubuntu/Projects/tabulardl-benchmark/run_experiments")
 )  # isort:skipimport pickle
 from general_utils.utils import set_lr_scheduler, set_optimizer  # noqa: E402
-from parsers.tabresnet_parser import parse_args  # noqa: E402
+from parsers.tabtransformer_parser import parse_args  # noqa: E402
 
 pd.options.display.max_columns = 100
 

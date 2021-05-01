@@ -108,7 +108,7 @@ nyc_taxi["dropoff_y"] = np.cos(nyc_taxi.dropoff_longitude) * np.sin(
 nyc_taxi["pickup_z"] = np.sin(nyc_taxi.pickup_latitude)
 nyc_taxi["dropoff_z"] = np.sin(nyc_taxi.dropoff_latitude)
 nyc_taxi["pickup_latitude"] = nyc_taxi.pickup_latitude / 60
-nyc_taxi["dropoff_laitude"] = nyc_taxi.dropoff_latitude / 60
+nyc_taxi["dropoff_latitude"] = nyc_taxi.dropoff_latitude / 60
 nyc_taxi["pickup_longitude"] = nyc_taxi.pickup_longitude / 180
 nyc_taxi["dropoff_longitude"] = nyc_taxi.dropoff_longitude / 180
 

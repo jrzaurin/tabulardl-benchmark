@@ -45,7 +45,16 @@ def parse_args():
     parser.add_argument(
         "--embed_dropout", type=float, default=0., help="embeddings dropout"
     )
-
+    parser.add_argument(
+        "--scale_cont",
+        action="store_true",
+        help="Apply sklearn's standard scaler to the continuous cols before passed to the network",
+    )
+    parser.add_argument(
+        "--batchnorm_cont",
+        action="store_true",
+        help="Apply batchnorm to the continuous cols",
+    )
     # train/eval parameters
     parser.add_argument("--lr", type=float, default=0.001, help="Learning rate.")
     parser.add_argument("--n_epochs", type=int, default=200, help="Number of epoch.")
