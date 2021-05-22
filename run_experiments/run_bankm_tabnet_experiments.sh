@@ -87,13 +87,13 @@ python bank_marketing/bankm_tabnet.py --optimizer AdamW --batch_size 512 --ghost
 python bank_marketing/bankm_tabnet.py --optimizer Adam --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.50 --lr_scheduler CyclicLR --lr 5e-4 --base_lr 5e-4 --max_lr 0.05 --n_cycles 10 --n_epochs 100 --save_results
 
 python bank_marketing/bankm_tabnet.py --optimizer RAdam --n_steps 7 --gamma 1.25 --lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.1 --final_div_factor 1e3 --n_epochs 1 --save_results
-python bank_marketing/bankm_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.25 ---lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.1 --final_div_factor 1e3 --n_epochs 1 --save_results
-python bank_marketing/bankm_tabnet.py --optimizer Adam --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.50 ---lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.1 --final_div_factor 1e3 --n_epochs 1 --save_results
+python bank_marketing/bankm_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.25 --lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.1 --final_div_factor 1e3 --n_epochs 1 --save_results
+python bank_marketing/bankm_tabnet.py --optimizer Adam --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.50 --lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.1 --final_div_factor 1e3 --n_epochs 1 --save_results
 
 python bank_marketing/bankm_tabnet.py --optimizer RAdam --n_steps 7 --gamma 1.25 --lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.07 --final_div_factor 1e3 --n_epochs 5 --save_results
-python bank_marketing/bankm_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.25 ---lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.07 --final_div_factor 1e3 --n_epochs 5 --save_results
-python bank_marketing/bankm_tabnet.py --optimizer Adam --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.50 ---lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.07 --final_div_factor 1e3 --n_epochs 5 --save_results
+python bank_marketing/bankm_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.25 --lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.07 --final_div_factor 1e3 --n_epochs 5 --save_results
+python bank_marketing/bankm_tabnet.py --optimizer Adam --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.50 --lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.07 --final_div_factor 1e3 --n_epochs 5 --save_results
 
 python bank_marketing/bankm_tabnet.py --optimizer RAdam --n_steps 7 --gamma 1.25 --lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.07 --final_div_factor 1e3 --n_epochs 10 --save_results
-python bank_marketing/bankm_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.25 ---lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.07 --final_div_factor 1e3 --n_epochs 10 --save_results
-python bank_marketing/bankm_tabnet.py --optimizer Adam --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.50 ---lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.07 --final_div_factor 1e3 --n_epochs 10 --save_results
+python bank_marketing/bankm_tabnet.py --optimizer AdamW --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.25 --lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.07 --final_div_factor 1e3 --n_epochs 10 --save_results
+python bank_marketing/bankm_tabnet.py --optimizer Adam --batch_size 512 --ghost_bn --virtual_batch_size 128 --n_steps 5 --gamma 1.50 --lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.07 --final_div_factor 1e3 --n_epochs 10 --save_results

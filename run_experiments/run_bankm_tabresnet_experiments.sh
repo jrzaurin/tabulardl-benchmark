@@ -1,17 +1,17 @@
-# python bank_marketing/bankm_tabresnet.py --optimizer Adam --save_results
-# python bank_marketing/bankm_tabresnet.py --optimizer AdamW --save_results
-# python bank_marketing/bankm_tabresnet.py --optimizer RAdam --lr 0.03 --save_results
-# python bank_marketing/bankm_tabresnet.py --optimizer RAdam --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer Adam --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer AdamW --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer RAdam --lr 0.03 --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer RAdam --save_results
 
-# python bank_marketing/bankm_tabresnet.py --optimizer Adam --save_results
-# python bank_marketing/bankm_tabresnet.py --optimizer AdamW --save_results
-# python bank_marketing/bankm_tabresnet.py --optimizer RAdam --lr 0.03 --save_results
-# python bank_marketing/bankm_tabresnet.py --optimizer RAdam --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer Adam --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer AdamW --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer RAdam --lr 0.03 --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer RAdam --save_results
 
-# python bank_marketing/bankm_tabresnet.py --optimizer Adam  --embed_dropout 0.1 --monitor val_acc --rop_mode max --save_results
-# python bank_marketing/bankm_tabresnet.py --optimizer AdamW --embed_dropout 0.1 --monitor val_acc --rop_mode max --save_results
-# python bank_marketing/bankm_tabresnet.py --optimizer RAdam --embed_dropout 0.1 --lr 0.03 --monitor val_acc --rop_mode max --save_results
-# python bank_marketing/bankm_tabresnet.py --optimizer RAdam --embed_dropout 0.1 --monitor val_acc --rop_mode max --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer Adam  --embed_dropout 0.1 --monitor val_acc --rop_mode max --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer AdamW --embed_dropout 0.1 --monitor val_acc --rop_mode max --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer RAdam --embed_dropout 0.1 --lr 0.03 --monitor val_acc --rop_mode max --save_results
+python bank_marketing/bankm_tabresnet.py --optimizer RAdam --embed_dropout 0.1 --monitor val_acc --rop_mode max --save_results
 
 python bank_marketing/bankm_tabresnet.py --embed_dropout 0.1 --optimizer Adam --save_results
 python bank_marketing/bankm_tabresnet.py --embed_dropout 0.1 --optimizer AdamW --save_results

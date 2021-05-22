@@ -1,7 +1,46 @@
+import pickle
+from pathlib import Path
+
 import torch
 from pytorch_widedeep.optim import RAdam
 from torch.optim.lr_scheduler import OneCycleLR  # type: ignore[attr-defined]
 from torch.optim.lr_scheduler import CyclicLR, ReduceLROnPlateau
+
+
+class AttrDict(dict):
+    def __init__(self, *args, **kwargs):
+        super(AttrDict, self).__init__(*args, **kwargs)
+        self.__dict__ = self
+
+
+def read_best_model_args(results_dir: Path, exp_idx: int = None):
+    files = sorted(list(results_dir.glob("*")))
+    res = []
+    for i, f in enumerate(files):
+        with open(results_dir / str(f), "rb") as f:  # type: ignore[assignment]
+            d = pickle.load(f)  # type: ignore[arg-type]
+        res.append((d["early_stopping"].best, d))
+
+    if exp_idx is not None:
+        best_params_dict = sorted(res, key=lambda x: x[0])[exp_idx][1]["args"]
+    else:
+        best_params_dict = sorted(res, key=lambda x: x[0])[0][1]["args"]
+
+    return AttrDict(best_params_dict)
+
+
+def load_focal_loss_params(results_dir: Path, exp_idx: int):
+    files = sorted(list(results_dir.glob("*")))
+    res = []
+    for i, f in enumerate(files):
+        with open(results_dir / str(f), "rb") as f:  # type: ignore[assignment]
+            d = pickle.load(f)  # type: ignore[arg-type]
+        res.append((d["early_stopping"].best, d))
+
+    fl_best_parms = sorted(res, key=lambda x: x[0])[exp_idx][1]["FLOptimizer"].best
+    alpha, gamma = fl_best_parms["alpha"], fl_best_parms["gamma"]
+
+    return alpha, gamma
 
 
 def steps_up_down(steps_per_epoch, n_epochs, pct_step_up, n_cycles):

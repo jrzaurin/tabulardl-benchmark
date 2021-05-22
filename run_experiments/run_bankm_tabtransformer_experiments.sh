@@ -26,10 +26,6 @@ python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --input_dim 16 -
 python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --input_dim 32 --n_heads 8 --n_blocks 6 --save_results
 python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --input_dim 64 --n_heads 16 --n_blocks 6 --save_results
 
-python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --lr 0.01 --input_dim 16 --n_heads 4 --n_blocks 6 --save_results
-python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --lr 0.01 --input_dim 32 --n_heads 8 --n_blocks 6 --save_results
-python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --lr 0.01 --input_dim 64 --n_heads 16 --n_blocks 6 --save_results
-
 python bank_marketing/bankm_tabtransformer.py --optimizer Adam --input_dim 16 --n_heads 4 --n_blocks 8 --dropout 0.2 --save_results
 python bank_marketing/bankm_tabtransformer.py --optimizer Adam --input_dim 32 --n_heads 8 --n_blocks 8 --dropout 0.2 --save_results
 python bank_marketing/bankm_tabtransformer.py --optimizer Adam --input_dim 64 --n_heads 16 --n_blocks 8 --dropout 0.2 --save_results
@@ -41,13 +37,6 @@ python bank_marketing/bankm_tabtransformer.py --optimizer AdamW --input_dim 64 -
 python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --input_dim 16 --n_heads 4 --n_blocks 8 --dropout 0.2 --save_results
 python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --input_dim 32 --n_heads 8 --n_blocks 8 --dropout 0.2 --save_results
 python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --input_dim 64 --n_heads 16 --n_blocks 8 --dropout 0.2 --save_results
-
-python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --lr 0.01 --input_dim 16 --n_heads 4 --n_blocks 8 --dropout 0.2 --save_results
-python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --lr 0.01 --input_dim 32 --n_heads 8 --n_blocks 8 --dropout 0.2 --save_results
-python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --lr 0.01 --input_dim 64 --n_heads 16 --n_blocks 8 --dropout 0.2 --save_results
-
-python bank_marketing/bankm_tabtransformer.py --optimizer Adam --lr 0.01 --input_dim 16 --n_heads 4 --n_blocks 4 --save_results
-python bank_marketing/bankm_tabtransformer.py --optimizer AdamW --lr 0.01 --input_dim 16 --n_heads 4 --n_blocks 4 --save_results
 
 python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --lr 0.01 --input_dim 16 --n_heads 4 --n_blocks 4 --with_wide --save_results
 python bank_marketing/bankm_tabtransformer.py --optimizer RAdam --lr 0.01 --input_dim 16 --n_heads 4 --n_blocks 6 --with_wide --save_results

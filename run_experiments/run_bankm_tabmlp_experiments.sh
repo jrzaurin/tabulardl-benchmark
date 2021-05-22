@@ -86,6 +86,6 @@ python bank_marketing/bankm_tabmlp.py --mlp_hidden_dims [200,100] --mlp_dropout 
 python bank_marketing/bankm_tabmlp.py --mlp_hidden_dims [200,100] --mlp_dropout 0.2 --optimizer AdamW --lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.01 --final_div_factor 1e3 --n_epochs 10 --save_results
 python bank_marketing/bankm_tabmlp.py --mlp_hidden_dims [200,100] --mlp_dropout 0.2 --optimizer RAdam --lr_scheduler OneCycleLR --lr 4e-4 --max_lr 0.01 --final_div_factor 1e3 --n_epochs 10 --save_results
 
-python bank_marketing/bankm_tabmlp.py --mlp_hidden_dims [100,50] --batch_size 512 --mlp_batchnorm --mlp_batchnorm_last --optimizer Adam --focal_loss --save_results
-python bank_marketing/bankm_tabmlp.py --mlp_hidden_dims [100,50] --batch_size 512 --mlp_batchnorm --mlp_batchnorm_last --optimizer AdamW --focal_loss --save_results
-python bank_marketing/bankm_tabmlp.py --mlp_hidden_dims [100,50] --batch_size 512 --optimizer RAdam --focal_loss --save_results
+python bank_marketing/bankm_tabmlp.py --mlp_hidden_dims [100,50] --batch_size 512 --mlp_batchnorm --mlp_batchnorm_last --optimizer Adam --rop_threshold_mode rel --focal_loss --save_results
+python bank_marketing/bankm_tabmlp.py --mlp_hidden_dims [100,50] --batch_size 512 --mlp_batchnorm --mlp_batchnorm_last --optimizer AdamW --rop_threshold_mode rel --focal_loss --save_results
+python bank_marketing/bankm_tabmlp.py --mlp_hidden_dims [100,50] --batch_size 512 --optimizer RAdam --rop_threshold_mode rel --focal_loss --save_results

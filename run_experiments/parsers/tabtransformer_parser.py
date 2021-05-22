@@ -13,6 +13,16 @@ def parse_args():
         help="bank_marketing or bank_marketing_kaggle",
     )
 
+    # should we use wide and text components  (only used for airbnb)
+    parser.add_argument(
+        "--with_wide",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--with_text",
+        action="store_true",
+    )
+
     # model parameters
     parser.add_argument(
         "--embed_dropout", type=float, default=0.0, help="embeddings dropout"
@@ -75,7 +85,6 @@ def parse_args():
         default="relu",
         help="one of relu, leaky_relu, gelu ",
     )
-    # model parameters
     parser.add_argument(
         "--mlp_hidden_dims",
         type=str,
@@ -104,11 +113,127 @@ def parse_args():
         help="Boolean indicating the order of the operations in the dense",
     )
 
-    # Wide model?
+    # deeptext model parameters (only used for airbnb)
     parser.add_argument(
-        "--with_wide",
+        "--max_vocab",
+        type=int,
+        default=20000,
+    )
+    parser.add_argument(
+        "--min_freq",
+        type=int,
+        default=5,
+    )
+    parser.add_argument(
+        "--maxlen",
+        type=int,
+        default=140,
+    )
+    parser.add_argument(
+        "--pad_first",
         action="store_true",
-        help="Boolean indicating if a wide component will be present",
+    )
+    parser.add_argument(
+        "--pad_idx",
+        type=int,
+        default=1,
+    )
+    parser.add_argument(
+        "--use_word_vectors",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--prepare_text",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--rnn_type",
+        type=str,
+        default="lstm",
+        help="one of lstm and gru",
+    )
+    parser.add_argument(
+        "--hidden_dim",
+        type=int,
+        default=64,
+        help="rnn hidden dim",
+    )
+    parser.add_argument(
+        "--n_layers",
+        type=int,
+        default=2,
+        help="rnn numb of layers",
+    )
+    parser.add_argument(
+        "--rnn_dropout",
+        type=float,
+        default=0.1,
+        help="rnn dropout",
+    )
+    parser.add_argument(
+        "--bidirectional",
+        action="store_true",
+        help="rnn bidirectional",
+    )
+    parser.add_argument(
+        "--use_hidden_state",
+        action="store_true",
+        help="whether to use the last hidden state or the rnn output as predictors",
+    )
+    parser.add_argument(
+        "--embed_dim",
+        type=int,
+        default=300,
+        help="Dimension of the word embedding matrix if non-pretained word vectors are used",
+    )
+    parser.add_argument(
+        "--embed_trainable",
+        action="store_true",
+        help="Boolean indicating if the pretrained embeddings are trainable",
+    )
+    parser.add_argument(
+        "--head_hidden_dims",
+        type=str,
+        default="None",
+    )
+    parser.add_argument(
+        "--head_activation",
+        type=str,
+        default="relu",
+        help="one of relu, leaky_relu, gelu ",
+    )
+    parser.add_argument("--head_dropout", type=float, default=0.1, help="mlp dropout")
+    parser.add_argument(
+        "--head_batchnorm",
+        action="store_true",
+        help="if true the dense layers will be built with BatchNorm",
+    )
+    parser.add_argument(
+        "--head_batchnorm_last",
+        action="store_true",
+        help="if true BatchNorm will be applied to the last of the dense layers",
+    )
+    parser.add_argument(
+        "--head_linear_first",
+        action="store_true",
+        help="Boolean indicating the order of the operations in the dense",
+    )
+
+    # warming up parameters (only used for airbnb)
+    parser.add_argument(
+        "--warmup",
+        action="store_true",
+        help="warmup model components before the joined learning stars",
+    )
+    parser.add_argument(
+        "--warmup_epochs",
+        type=int,
+        default=5,
+    )
+    parser.add_argument(
+        "--warmup_max_lr",
+        type=float,
+        default=0.01,
     )
 
     # train/eval parameters

@@ -1,6 +1,6 @@
-import sys
 import os
 import pickle
+import sys
 from copy import copy
 from datetime import datetime
 from pathlib import Path
@@ -8,8 +8,8 @@ from time import time
 from typing import Union
 
 import lightgbm as lgb
-import pandas as pd
 import numpy as np
+import pandas as pd
 from lightgbm import Dataset as lgbDataset
 from pytorch_widedeep.utils import LabelEncoder
 from sklearn.metrics import mean_squared_error
@@ -58,8 +58,12 @@ for df in [train, valid, test]:
 
 upper_trip_duration = train.target.quantile(0.99)
 lower_trip_duration = 60  # a minute
-train = train[(train.target >= lower_trip_duration) & (train.target <= upper_trip_duration)]
-valid = valid[(valid.target >= lower_trip_duration) & (valid.target <= upper_trip_duration)]
+train = train[
+    (train.target >= lower_trip_duration) & (train.target <= upper_trip_duration)
+]
+valid = valid[
+    (valid.target >= lower_trip_duration) & (valid.target <= upper_trip_duration)
+]
 test = test[(test.target >= lower_trip_duration) & (test.target <= upper_trip_duration)]
 
 cat_cols = []

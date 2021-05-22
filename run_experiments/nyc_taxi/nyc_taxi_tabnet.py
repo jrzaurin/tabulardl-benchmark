@@ -7,18 +7,16 @@ from time import time
 
 import pandas as pd
 import torch
-from focal_loss_optimizer import FLOptimizer
 from pytorch_widedeep import Trainer
 from pytorch_widedeep.callbacks import EarlyStopping, LRHistory
-from pytorch_widedeep.metrics import Accuracy, F1Score
-from pytorch_widedeep.models import TabMlp, WideDeep
+from pytorch_widedeep.models import TabNet, WideDeep
 from pytorch_widedeep.preprocessing import TabPreprocessor
 
 sys.path.append(
     os.path.abspath("/home/ubuntu/Projects/tabulardl-benchmark/run_experiments")
 )  # isort:skipimport pickle
 from general_utils.utils import set_lr_scheduler, set_optimizer  # noqa: E402
-from parsers.tabmlp_parser import parse_args  # noqa: E402
+from parsers.tabnet_parser import parse_args  # noqa: E402
 
 pd.options.display.max_columns = 100
 
@@ -29,61 +27,61 @@ args = parse_args()
 ROOTDIR = Path("/home/ubuntu/Projects/tabulardl-benchmark")
 WORKDIR = Path(os.getcwd())
 
-PROCESSED_DATA_DIR = ROOTDIR / "/".join(["processed_data", args.bankm_dset])
-RESULTS_DIR = WORKDIR / "/".join(["results", args.bankm_dset, "tabmlp"])
+PROCESSED_DATA_DIR = ROOTDIR / "processed_data/nyc_taxi/"
+RESULTS_DIR = WORKDIR / "results/nyc_taxi/tabnet"
 if not RESULTS_DIR.is_dir():
     os.makedirs(RESULTS_DIR)
 
-train = pd.read_pickle(PROCESSED_DATA_DIR / "bankm_train.p")
-valid = pd.read_pickle(PROCESSED_DATA_DIR / "bankm_val.p")
-colnames = [c.replace(".", "_") for c in train.columns]
-train.columns = colnames
-valid.columns = colnames
+train = pd.read_pickle(PROCESSED_DATA_DIR / "nyc_taxi_train.p")
+valid = pd.read_pickle(PROCESSED_DATA_DIR / "nyc_taxi_val.p")
 
-# All columns will be treated as categorical. The column with the highest
-# number of categories has 308
-cat_embed_cols = [c for c in train.columns if c != "target"]
+drop_cols = [
+    "pickup_datetime",
+    "dropoff_datetime",
+    "trip_duration",
+]  # trip_duration is "target"
+for df in [train, valid]:
+    df.drop(drop_cols, axis=1, inplace=True)
 
-prepare_tab = TabPreprocessor(embed_cols=cat_embed_cols)
+upper_trip_duration = train.target.quantile(0.99)
+lower_trip_duration = 60  # a minute
+train = train[
+    (train.target >= lower_trip_duration) & (train.target <= upper_trip_duration)
+]
+valid = valid[
+    (valid.target >= lower_trip_duration) & (valid.target <= upper_trip_duration)
+]
+
+cat_embed_cols = []
+for col in train.columns:
+    if train[col].dtype == "O" or train[col].nunique() < 200 and col != "target":
+        cat_embed_cols.append(col)
+num_cols = [c for c in train.columns if c not in cat_embed_cols + ["target"]]
+
+prepare_tab = TabPreprocessor(
+    embed_cols=cat_embed_cols, continuous_cols=num_cols, scale=args.scale_cont
+)
 X_train = prepare_tab.fit_transform(train)
 y_train = train.target.values
 X_valid = prepare_tab.transform(valid)
 y_valid = valid.target.values
 
-if args.mlp_hidden_dims == "auto":
-    n_inp_dim = sum([e[2] for e in prepare_tab.embeddings_input])
-    mlp_hidden_dims = [4 * n_inp_dim, 2 * n_inp_dim]
-else:
-    mlp_hidden_dims = eval(args.mlp_hidden_dims)
-
-if args.focal_loss:
-    floptimizer = FLOptimizer()
-    floptimizer.optimize(
-        X_train,
-        y_train,
-        X_valid,
-        y_valid,
-        prepare_tab,
-        mlp_hidden_dims,
-        args,
-        maxevals=args.maxevals,
-    )
-    alpha = floptimizer.best["alpha"]
-    gamma = floptimizer.best["gamma"]
-else:
-    alpha = 0.25
-    gamma = 2
-
-deeptabular = TabMlp(
+deeptabular = TabNet(
     column_idx=prepare_tab.column_idx,
-    mlp_hidden_dims=mlp_hidden_dims,
-    mlp_activation=args.mlp_activation,
-    mlp_dropout=args.mlp_dropout,
-    mlp_batchnorm=args.mlp_batchnorm,
-    mlp_batchnorm_last=args.mlp_batchnorm_last,
-    mlp_linear_first=args.mlp_linear_first,
     embed_input=prepare_tab.embeddings_input,
     embed_dropout=args.embed_dropout,
+    continuous_cols=prepare_tab.continuous_cols,
+    batchnorm_cont=args.batchnorm_cont,
+    n_steps=args.n_steps,
+    step_dim=args.step_dim,
+    attn_dim=args.attn_dim,
+    dropout=args.dropout,
+    n_glu_step_dependent=args.n_glu_step_dependent,
+    n_glu_shared=args.n_glu_shared,
+    ghost_bn=args.ghost_bn,
+    virtual_batch_size=args.virtual_batch_size,
+    momentum=args.momentum,
+    gamma=args.gamma,
 )
 model = WideDeep(deeptabular=deeptabular)
 
@@ -99,14 +97,11 @@ early_stopping = EarlyStopping(
 
 trainer = Trainer(
     model,
-    objective="binary_focal_loss" if args.focal_loss else "binary",
+    objective="regression",
     optimizers=optimizers,
     lr_schedulers=lr_schedulers,
     reducelronplateau_criterion=args.monitor.split("_")[-1],
     callbacks=[early_stopping, LRHistory(n_epochs=args.n_epochs)],
-    metrics=[Accuracy, F1Score],
-    alpha=alpha,
-    gamma=gamma,
 )
 
 start = time()
@@ -121,13 +116,11 @@ runtime = time() - start
 
 if args.save_results:
     suffix = str(datetime.now()).replace(" ", "_").split(".")[:-1][0]
-    filename = "_".join(["bankm_tabmlp", suffix]) + ".p"
+    filename = "_".join(["nyc_taxi_tabnet", suffix]) + ".p"
     results_d = {}
     results_d["args"] = args.__dict__
-    results_d["FLOptimizer"] = floptimizer if args.focal_loss else "NA"
     results_d["early_stopping"] = early_stopping
     results_d["trainer_history"] = trainer.history
-    results_d["trainer_lr_history"] = trainer.lr_history
     results_d["runtime"] = runtime
     with open(RESULTS_DIR / filename, "wb") as f:
         pickle.dump(results_d, f)

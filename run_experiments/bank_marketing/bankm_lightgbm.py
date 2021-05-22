@@ -11,7 +11,7 @@ import lightgbm as lgb
 import pandas as pd
 from lightgbm import Dataset as lgbDataset
 from pytorch_widedeep.utils import LabelEncoder
-from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
+from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, roc_auc_score
 
 sys.path.append(
     os.path.abspath("/Users/javier/Projects/tabulardl-benchmark/run_experiments")
@@ -112,8 +112,9 @@ runtime = time() - start
 
 preds = (model.predict(lgbtest.data) > 0.5).astype("int")
 acc = accuracy_score(lgbtest.label, preds)
+auc = roc_auc_score(lgbtest.label, preds)
 f1 = f1_score(lgbtest.label, preds)
-print(f"Accuracy: {acc}. F1: {f1}")
+print(f"Accuracy: {acc}. F1: {f1}. ROC_AUC: {auc}")
 print(confusion_matrix(lgbtest.label, preds))
 
 # SAVE
@@ -123,7 +124,8 @@ results_d = {}
 results_d["best_params"] = optimizer.best
 results_d["runtime"] = runtime
 results_d["acc"] = acc
-results_d["f1"] = acc
+results_d["auc"] = auc
+results_d["f1"] = f1
 with open(RESULTS_DIR / results_filename, "wb") as f:
     pickle.dump(results_d, f)
 

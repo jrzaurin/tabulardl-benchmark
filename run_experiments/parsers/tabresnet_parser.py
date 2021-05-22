@@ -26,7 +26,7 @@ def parse_args():
     parser.add_argument(
         "--mlp_hidden_dims",
         type=str,
-        default="[200, 100]",
+        default="None",
         help="if auto it will do 4 x inp_dim -> 2 x inp_dim -> out",
     )
     parser.add_argument(
@@ -52,7 +52,22 @@ def parse_args():
         help="Boolean indicating the order of the operations in the dense",
     )
     parser.add_argument(
-        "--embed_dropout", type=float, default=0., help="embeddings dropout"
+        "--embed_dropout", type=float, default=0.0, help="embeddings dropout"
+    )
+    parser.add_argument(
+        "--scale_cont",
+        action="store_true",
+        help="Apply sklearn's standard scaler to the continuous cols before passed to the network",
+    )
+    parser.add_argument(
+        "--batchnorm_cont",
+        action="store_true",
+        help="Apply batchnorm to the continuous cols",
+    )
+    parser.add_argument(
+        "--concat_cont_first",
+        action="store_true",
+        help="concatenate cont before or after the Resnet blocks",
     )
 
     # train/eval parameters

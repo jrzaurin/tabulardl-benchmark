@@ -44,7 +44,7 @@ def parse_args():
         help="Boolean indicating the order of the operations in the dense",
     )
     parser.add_argument(
-        "--embed_dropout", type=float, default=0., help="embeddings dropout"
+        "--embed_dropout", type=float, default=0.0, help="embeddings dropout"
     )
 
     # train/eval parameters
