@@ -7,12 +7,8 @@ from pytorch_widedeep.models import TabResnet, WideDeep
 sys.path.append(
     os.path.abspath("/home/ubuntu/Projects/tabulardl-benchmark/run_experiments")
 )  # isort:skipimport pickle
-from nyc_taxi_tabmlp_best import (  # noqa: E402
-    set_dirs,
-    prepare_data,
-    run_experiment_and_save,
-)
-
+from nyc_taxi_tabmlp_best import prepare_data  # noqa: E402
+from nyc_taxi_tabmlp_best import run_experiment_and_save, set_dirs  # noqa: E402
 
 ROOTDIR = Path("/home/ubuntu/Projects/tabulardl-benchmark")
 WORKDIR = Path(os.getcwd())

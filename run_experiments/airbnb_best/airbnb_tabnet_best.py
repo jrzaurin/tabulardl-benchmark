@@ -9,12 +9,9 @@ from pytorch_widedeep.models import TabNet, WideDeep
 sys.path.append(
     os.path.abspath("/home/ubuntu/Projects/tabulardl-benchmark/run_experiments")
 )  # isort:skipimport pickle
+from airbnb_tabmlp_best import load_dataset  # noqa: E402
 from airbnb_tabmlp_best import prepare_data  # noqa: E402
-from airbnb_tabmlp_best import (  # noqa: E402
-    load_dataset,
-    run_experiment_and_save,
-    set_dirs,
-)
+from airbnb_tabmlp_best import run_experiment_and_save, set_dirs  # noqa: E402
 
 pd.options.display.max_columns = 100
 

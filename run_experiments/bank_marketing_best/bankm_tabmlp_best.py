@@ -12,16 +12,17 @@ from pytorch_widedeep.callbacks import EarlyStopping, LRHistory, ModelCheckpoint
 from pytorch_widedeep.metrics import Accuracy, F1Score
 from pytorch_widedeep.models import TabMlp, WideDeep
 from pytorch_widedeep.preprocessing import TabPreprocessor
-from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, roc_auc_score
 
 sys.path.append(
     os.path.abspath("/home/ubuntu/Projects/tabulardl-benchmark/run_experiments")
 )  # isort:skipimport pickle
-from general_utils.utils import (  # noqa: E402
-    read_best_model_args,
-    load_focal_loss_params,
-    set_optimizer,
+from general_utils.utils import load_focal_loss_params  # noqa: E402
+
+from general_utils.utils import (  # isort:skipimport pickle # noqa: E402
+    read_best_model_args,  # noqa: E402
     set_lr_scheduler,
+    set_optimizer,
 )
 
 pd.options.display.max_columns = 100

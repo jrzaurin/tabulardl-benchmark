@@ -7,13 +7,9 @@ from pytorch_widedeep.models import TabNet, WideDeep
 sys.path.append(
     os.path.abspath("/home/ubuntu/Projects/tabulardl-benchmark/run_experiments")
 )  # isort:skipimport pickle
+from bankm_tabmlp_best import prepare_data  # noqa: E402
+from bankm_tabmlp_best import run_experiment_and_save, set_dirs  # noqa: E402
 from general_utils.utils import read_best_model_args  # noqa: E402
-from bankm_tabmlp_best import (  # noqa: E402
-    set_dirs,
-    prepare_data,
-    run_experiment_and_save,
-)
-
 
 ROOTDIR = Path("/home/ubuntu/Projects/tabulardl-benchmark")
 WORKDIR = Path(os.getcwd())
