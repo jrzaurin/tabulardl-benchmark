@@ -108,10 +108,14 @@ nyc_taxi["dropoff_y"] = np.cos(nyc_taxi.dropoff_longitude) * np.sin(
 nyc_taxi["pickup_z"] = np.sin(nyc_taxi.pickup_latitude)
 nyc_taxi["dropoff_z"] = np.sin(nyc_taxi.dropoff_latitude)
 nyc_taxi["pickup_latitude"] = nyc_taxi.pickup_latitude / 60
-nyc_taxi["dropoff_laitude"] = nyc_taxi.dropoff_latitude / 60
+nyc_taxi["dropoff_latitude"] = nyc_taxi.dropoff_latitude / 60
 nyc_taxi["pickup_longitude"] = nyc_taxi.pickup_longitude / 180
 nyc_taxi["dropoff_longitude"] = nyc_taxi.dropoff_longitude / 180
 
+# I know we have train_duration in the data, but just for sanity
+nyc_taxi["target"] = (nyc_taxi.dropoff_datetime - nyc_taxi.pickup_datetime).astype(
+    "timedelta64[s]"
+)
 
 nyc_taxi_train = nyc_taxi[nyc_taxi.dset == 0].drop("dset", axis=1)
 nyc_taxi_val = nyc_taxi[nyc_taxi.dset == 1].drop("dset", axis=1)

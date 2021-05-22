@@ -53,10 +53,10 @@ adult["target"] = (adult["income"].apply(lambda x: ">50" in x)).astype(int)
 adult.drop("income", axis=1, inplace=True)
 
 adult_train, adult_test = train_test_split(
-    adult, random_state=SEED, stratify=adult.target
+    adult, test_size=0.2, random_state=SEED, stratify=adult.target
 )
 adult_val, adult_test = train_test_split(
-    adult_test, random_state=SEED, stratify=adult_test.target
+    adult_test, test_size=0.5, random_state=SEED, stratify=adult_test.target
 )
 
 adult_train.to_pickle(PROCESSED_DATA_DIR / "adult_train.p")

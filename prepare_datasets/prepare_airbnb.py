@@ -1,19 +1,18 @@
 import os
 import re
 import warnings
-from pathlib import Path
+from collections import Counter
 from functools import reduce
 from itertools import chain
-from collections import Counter
+from pathlib import Path
 
-import umap
+import gender_guesser.detector as gender
 import numpy as np
 import pandas as pd
-import gender_guesser.detector as gender
+import umap
+from sklearn.exceptions import NotFittedError
 from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.utils.validation import check_is_fitted
-from sklearn.exceptions import NotFittedError
-
 
 warnings.filterwarnings("ignore")
 
@@ -362,7 +361,7 @@ if not has_nan:
 # nights  multiplied by the estimated bookings over a period gives the
 # occupancy rate. Therefore, in the expression I have used below, if you want
 # to turn my implementation of 'yield' into a "proper" one under the San
-# Francisco model assumptions simply multiply my yield by 6 (3 * (1/0.5)) or
+# Francisco model assumptions simply multiply my yield by 6 (3 * 2) or
 # by 72 (3 * 2 * 12) if you prefer per year.
 airbnb["yield"] = airbnb["price"] * airbnb["reviews_per_month"]
 airbnb.drop(["price", "reviews_per_month"], axis=1, inplace=True)
