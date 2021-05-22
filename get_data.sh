@@ -39,4 +39,11 @@ cd raw_data/nyc_taxi
 unzip nyc-taxi-trip-duration.zip
 cd ~/Projects/tabulardl-benchmark/
 
+# Forest Cover
+wget https://archive.ics.uci.edu/ml/machine-learning-databases/covtype/covtype.data.gz
+mkdir raw_data/covertype
+mv covtype.data.gz raw_data/covertype
+cd raw_data/covertype
+gunzip covtype.data.gz
+cd ~/Projects/tabulardl-benchmark/
 
