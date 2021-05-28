@@ -1,0 +1,87 @@
+mlp_hidden_dims,mlp_activation,mlp_dropout,mlp_batchnorm,mlp_batchnorm_last,mlp_linear_first,embed_dropout,lr,batch_size,weight_decay,optimizer,lr_scheduler,base_lr,max_lr,div_factor,final_div_factor,n_cycles,val_loss
+"[100,50]",relu,0.1,False,False,False,0.0,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.004899503430351615
+"[100,50]",relu,0.1,True,True,False,0.0,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.004934641197905876
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.004960494232363999
+"[100,50]",relu,0.1,True,True,False,0.1,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.004962736798916012
+"[100,50]",relu,0.1,True,True,False,0.0,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.0049779522232711315
+"[100,50]",relu,0.1,True,True,False,0.1,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.004980126483133063
+"[100,50]",relu,0.1,True,True,False,0.1,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2638379093259573
+"[100,50]",relu,0.1,True,False,True,0.1,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2639231802895665
+"[100,50]",relu,0.1,True,True,False,0.1,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26434060651808977
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26434632670134306
+"[100,50]",relu,0.1,True,False,False,0.1,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26463927514851093
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26479747984558344
+"[100,50]",leaky_relu,0.1,False,False,False,0.1,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2648944929242134
+"[100,50]",relu,0.2,False,False,False,0.1,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26502746995538473
+"[100,50]",relu,0.1,True,False,True,0.1,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2651892155408859
+"[100,50]",relu,0.2,False,False,False,0.1,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2651997394859791
+"[100,50]",relu,0.1,False,False,True,0.1,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2652221452444792
+"[100,50]",relu,0.2,False,False,False,0.1,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2653100239112973
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2655141903087497
+"[100,50]",relu,0.1,True,False,True,0.1,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2655724799260497
+"[100,50]",relu,0.1,False,False,True,0.1,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26570784486830235
+"[100,50]",leaky_relu,0.1,False,False,False,0.1,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2658279584720731
+"[100,50]",relu,0.1,False,False,True,0.1,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26584759913384914
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,1024,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2662803828716278
+"[200, 100]",relu,0.1,False,False,False,0.1,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2663476299494505
+"[100,50]",relu,0.1,True,False,False,0.1,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2663785293698311
+"[100,50]",leaky_relu,0.1,False,False,False,0.1,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26640593726187944
+"[100,50]",relu,0.1,False,True,False,0.1,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26641954947263
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2664225744083524
+"[100,50]",relu,0.1,False,True,False,0.1,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2664571776986122
+"[200, 100]",relu,0.1,False,False,False,0.1,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26647810731083155
+"[200,100]",relu,0.2,False,False,False,0.1,0.0004,64,0.0,RAdam,OneCycleLR,0.001,0.01,25,1000.0,5.0,0.2665956164440833
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,512,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2666677236557007
+"[100,50]",relu,0.1,False,True,False,0.1,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2667684555053711
+"[200, 100]",relu,0.1,False,False,False,0.1,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26704840548336506
+"[100,50]",relu,0.1,True,True,False,0.1,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2670603832229972
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,512,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2672554813325405
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,1024,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2673970013856888
+"[100,50]",relu,0.1,True,False,False,0.1,0.001,512,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2674883482977748
+"[200, 100]",relu,0.1,False,False,False,0.1,0.001,128,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2675308431269693
+"[200,100]",relu,0.2,False,False,False,0.1,0.0004,64,0.0,Adam,OneCycleLR,0.001,0.01,25,1000.0,5.0,0.26759348514158865
+"[200, 100]",relu,0.1,False,False,False,0.1,0.001,1024,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2676052004098892
+"[200, 100]",relu,0.1,False,False,False,0.1,0.001,128,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.267654149991567
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,128,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2679159836690934
+"[200,100]",relu,0.2,False,False,False,0.1,0.0004,128,0.0,Adam,OneCycleLR,0.001,0.01,25,1000.0,5.0,0.26802477851265766
+"[200, 100]",relu,0.1,False,False,False,0.0,0.001,128,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26808156928078075
+"[200, 100]",relu,0.1,False,False,False,0.1,0.001,1024,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.268120214343071
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,1024,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26818257197737694
+"[200, 100]",relu,0.1,False,False,False,0.0,0.001,128,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2681980042672548
+"[200, 100]",relu,0.1,False,False,False,0.0,0.001,128,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2682108451597026
+"[400,200,100]",relu,0.1,False,False,False,0.1,0.001,128,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26836425017138
+"[400,200]",relu,0.1,False,False,False,0.1,0.001,128,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26837556039700744
+"[200, 100]",relu,0.1,False,False,False,0.1,0.001,1024,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.268517242744565
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,128,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2685302073349718
+"[200,100]",relu,0.2,False,False,False,0.1,0.0004,128,0.0,AdamW,OneCycleLR,0.001,0.01,25,1000.0,5.0,0.26854840824838544
+"[200, 100]",relu,0.1,False,False,False,0.1,0.001,128,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2685897523751024
+"[200,100]",relu,0.2,False,False,False,0.1,0.0004,64,0.0,AdamW,OneCycleLR,0.001,0.01,25,1000.0,5.0,0.26871186901222577
+"[100,50]",relu,0.1,False,False,False,0.1,0.001,128,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2689380406356249
+"[400,200,100]",relu,0.5,False,False,False,0.1,0.001,128,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2691554400275965
+"[200,100]",relu,0.2,False,False,False,0.1,0.0004,32,0.0,RAdam,OneCycleLR,0.001,0.01,25,1000.0,5.0,0.2692663716998967
+"[200,100]",relu,0.2,False,False,False,0.1,0.0005,128,0.0,Adam,CyclicLR,0.0005,0.01,25,10000.0,10.0,0.269375886096329
+"[200,100]",relu,0.2,False,False,False,0.1,0.0005,128,0.0,RAdam,CyclicLR,0.0005,0.01,25,10000.0,10.0,0.2694265839994931
+"[400,200]",relu,0.5,False,False,False,0.1,0.001,128,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2694526026483442
+auto,relu,0.5,False,False,False,0.1,0.001,128,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26953827430967425
+"[400,200,100]",relu,0.1,False,False,False,0.1,0.001,128,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26958243548870087
+auto,relu,0.1,False,False,False,0.1,0.001,128,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2696611368265308
+"[400,200,100]",relu,0.1,False,False,False,0.1,0.001,128,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26972483074078796
+auto,relu,0.1,False,False,False,0.1,0.001,128,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2697314712844911
+auto,relu,0.5,False,False,False,0.1,0.001,128,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.26978608794876785
+"[400,200]",relu,0.1,False,False,False,0.1,0.001,128,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.27009481289347664
+auto,relu,0.5,False,False,False,0.1,0.001,128,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2701822590143954
+"[200,100]",relu,0.2,False,False,False,0.1,0.0004,32,0.0,Adam,OneCycleLR,0.001,0.01,25,1000.0,5.0,0.27062875752852966
+"[200,100]",relu,0.2,False,False,False,0.1,0.0004,128,0.0,RAdam,OneCycleLR,0.001,0.01,25,1000.0,5.0,0.27065835966438545
+auto,relu,0.1,False,False,False,0.1,0.001,128,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2707114327149313
+"[400,200]",relu,0.5,False,False,False,0.1,0.001,128,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2707151638679817
+"[400,200,100]",relu,0.5,False,False,False,0.1,0.001,128,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.27077801208027075
+"[400,200]",relu,0.1,False,False,False,0.1,0.001,128,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.27080672099942066
+"[200,100]",relu,0.2,False,False,False,0.1,0.0004,32,0.0,AdamW,OneCycleLR,0.001,0.01,25,1000.0,5.0,0.2711879341008742
+"[400,200]",relu,0.5,False,False,False,0.1,0.001,128,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.27143109406604143
+"[200,100]",relu,0.2,False,False,False,0.1,0.0005,128,0.0,AdamW,CyclicLR,0.0005,0.01,25,10000.0,10.0,0.27215093178827254
+"[200,100]",relu,0.2,False,False,False,0.1,0.0005,64,0.0,Adam,CyclicLR,0.0005,0.01,25,10000.0,10.0,0.27220346230613296
+"[400,200,100]",relu,0.5,False,False,False,0.1,0.001,128,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2723963680814524
+"[200,100]",relu,0.2,False,False,False,0.1,0.0005,64,0.0,RAdam,CyclicLR,0.0005,0.01,25,10000.0,10.0,0.27272723947674776
+"[200,100]",relu,0.2,False,False,False,0.1,0.0005,64,0.0,AdamW,CyclicLR,0.0005,0.01,25,10000.0,10.0,0.27315311922022134
+"[200, 100]",relu,0.1,False,False,False,0.0,0.03,128,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2742306658479034
+"[200, 100]",relu,0.1,False,False,False,0.1,0.03,128,0.0,RAdam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,0.2764405598405932

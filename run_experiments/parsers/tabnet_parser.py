@@ -3,7 +3,7 @@ import argparse
 
 def parse_args():
 
-    parser = argparse.ArgumentParser(description="TabRenNet parameters")
+    parser = argparse.ArgumentParser(description="TabResNet parameters")
 
     # data set
     parser.add_argument(

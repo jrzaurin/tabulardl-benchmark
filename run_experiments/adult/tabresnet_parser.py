@@ -3,7 +3,7 @@ import argparse
 
 def parse_args():
 
-    parser = argparse.ArgumentParser(description="TabRenNet parameters")
+    parser = argparse.ArgumentParser(description="TabResNet parameters")
 
     # model parameters
     parser.add_argument(

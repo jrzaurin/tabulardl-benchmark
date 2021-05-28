@@ -31,7 +31,7 @@ def prepare_data(results_dir):
     prepare_tab = TabPreprocessor(
         embed_cols=cat_embed_cols,
         continuous_cols=num_cols,
-        scale=False,
+        scale=True,
         for_tabtransformer=True,
     )
     X_train = prepare_tab.fit_transform(train)
