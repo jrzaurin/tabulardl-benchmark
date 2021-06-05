@@ -31,40 +31,28 @@ ROOTDIR = Path("/Users/javier/Projects/tabulardl-benchmark/")
 # WORKDIR = Path(os.getcwd())
 WORKDIR = Path("/Users/javier/Projects/tabulardl-benchmark/run_experiments")
 
-PROCESSED_DATA_DIR = ROOTDIR / "processed_data/nyc_taxi/"
+PROCESSED_DATA_DIR = ROOTDIR / "processed_data/fb_comments/"
 
-RESULTS_DIR = WORKDIR / "results/nyc_taxi/lightgbm"
+RESULTS_DIR = WORKDIR / "results/fb_comments/lightgbm"
 if not RESULTS_DIR.is_dir():
     os.makedirs(RESULTS_DIR)
 
-MODELS_DIR = WORKDIR / "models/nyc_taxi/lightgbm"
+MODELS_DIR = WORKDIR / "models/fb_comments/lightgbm"
 if not MODELS_DIR.is_dir():
     os.makedirs(MODELS_DIR)
 
 OPTIMIZE_WITH = "optuna"
 
 
-train = pd.read_pickle(PROCESSED_DATA_DIR / "nyc_taxi_train.p")
-valid = pd.read_pickle(PROCESSED_DATA_DIR / "nyc_taxi_val.p")
-test = pd.read_pickle(PROCESSED_DATA_DIR / "nyc_taxi_test.p")
+train = pd.read_pickle(PROCESSED_DATA_DIR / "fb_comments_train.p")
+valid = pd.read_pickle(PROCESSED_DATA_DIR / "fb_comments_val.p")
+test = pd.read_pickle(PROCESSED_DATA_DIR / "fb_comments_test.p")
 
-drop_cols = [
-    "pickup_datetime",
-    "dropoff_datetime",
-    "trip_duration",
-]  # trip_duration is "target"
-for df in [train, valid, test]:
-    df.drop(drop_cols, axis=1, inplace=True)
+upper_limit = train.target.quantile(0.99)
 
-upper_trip_duration = train.target.quantile(0.99)
-lower_trip_duration = 60  # a minute
-train = train[
-    (train.target >= lower_trip_duration) & (train.target <= upper_trip_duration)
-]
-valid = valid[
-    (valid.target >= lower_trip_duration) & (valid.target <= upper_trip_duration)
-]
-test = test[(test.target >= lower_trip_duration) & (test.target <= upper_trip_duration)]
+train = train[train.target <= upper_limit]
+valid = valid[valid.target <= upper_limit]
+test = test[test.target <= upper_limit]
 
 cat_cols = []
 for col in train.columns:
@@ -140,7 +128,7 @@ print(f"R2: {r2}")
 
 # SAVE
 suffix = str(datetime.now()).replace(" ", "_").split(".")[:-1][0]
-results_filename = "_".join(["nyc_taxi_lightgbm", suffix]) + ".p"
+results_filename = "_".join(["fb_comments_lightgbm", suffix]) + ".p"
 results_d = {}
 results_d["best_params"] = optimizer.best
 results_d["runtime"] = runtime
@@ -149,6 +137,6 @@ results_d["r2"] = r2
 with open(RESULTS_DIR / results_filename, "wb") as f:
     pickle.dump(results_d, f)
 
-model_filename = "_".join(["model_nyc_taxi_lightgbm", suffix]) + ".p"
+model_filename = "_".join(["model_fb_comments_lightgbm", suffix]) + ".p"
 with open(MODELS_DIR / model_filename, "wb") as f:
     pickle.dump(model, f)

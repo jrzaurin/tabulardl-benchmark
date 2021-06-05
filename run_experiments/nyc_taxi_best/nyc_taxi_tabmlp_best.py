@@ -12,7 +12,7 @@ from pytorch_widedeep import Trainer
 from pytorch_widedeep.callbacks import EarlyStopping, LRHistory, ModelCheckpoint
 from pytorch_widedeep.models import TabMlp, WideDeep
 from pytorch_widedeep.preprocessing import TabPreprocessor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, r2_score
 
 sys.path.append(
     os.path.abspath("/home/ubuntu/Projects/tabulardl-benchmark/run_experiments")
@@ -169,6 +169,7 @@ def run_experiment_and_save(
 
     y_pred = trainer.predict(X_tab=X_test)
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+    r2 = r2_score(y_test, y_pred)
     print(f"rmse with the best model: {rmse}")
 
     if args.save_results:
@@ -177,6 +178,7 @@ def run_experiment_and_save(
         results_d = {}
         results_d["args"] = args
         results_d["rmse"] = rmse
+        results_d["r2"] = r2
         results_d["early_stopping"] = early_stopping
         results_d["trainer_history"] = trainer.history
         results_d["trainer_lr_history"] = trainer.lr_history

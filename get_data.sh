@@ -47,3 +47,11 @@ cd raw_data/covertype
 gunzip covtype.data.gz
 cd ~/Projects/tabulardl-benchmark/
 
+# Facebook Volume
+wget https://archive.ics.uci.edu/ml/machine-learning-databases/00363/Dataset.zip
+mkdir raw_data/fb_comments
+mv Dataset.zip raw_data/fb_comments
+cd raw_data/fb_comments
+unzip Dataset.zip
+mv Dataset/Training/Features_Variant_5.csv .
+cd ~/Projects/tabulardl-benchmark/

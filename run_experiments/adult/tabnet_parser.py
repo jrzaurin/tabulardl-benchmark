@@ -50,7 +50,7 @@ def parse_args():
     parser.add_argument(
         "--momentum",
         type=float,
-        default=0.98,
+        default=0.02,
         help="Ghost Batch Normalization's momentum",
     )
     parser.add_argument(
@@ -62,7 +62,7 @@ def parse_args():
     )
 
     # train/eval parameters
-    parser.add_argument("--lr", type=float, default=0.03, help="Learning rate.")
+    parser.add_argument("--lr", type=float, default=0.001, help="Learning rate.")
     parser.add_argument("--n_epochs", type=int, default=200, help="Number of epoch.")
     parser.add_argument("--batch_size", type=int, default=128, help="Batch size.")
     parser.add_argument("--weight_decay", type=float, default=0.0, help="l2 reg.")
