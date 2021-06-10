@@ -17,8 +17,6 @@ LEADERBOARDS_DIR = Path("leaderboards")
 LEADERBOARDS_DIR.mkdir(parents=True, exist_ok=True)
 
 
-# datasets = ["adult", "bank_marketing", "airbnb", "nyc_taxi"]
-# models = ["tabmlp", "tabresnet", "tabnet", "tabtransformer"]
 datasets = ["adult", "bank_marketing", "nyc_taxi", "fb_comments"]
 models = ["tabmlp", "tabresnet", "tabnet", "tabtransformer"]
 result_setup = []
@@ -43,7 +41,6 @@ for dataset, model, keys_to_keep in tqdm(result_setup):
 datasets_and_metrics = [
     ("adult", ["acc"], False),
     ("bank_marketing", ["f1", "auc"], False),
-    # ("airbnb", ["rmse"], True),
     ("nyc_taxi", ["rmse", "r2"], True),
     ("fb_comments", ["rmse", "r2"], True),
 ]

@@ -61,7 +61,7 @@ if args.with_wide:
         embed_cols=cat_embed_cols,
         continuous_cols=num_cols,
         for_tabtransformer=True,
-        scale=False,
+        scale=True,
     )
     X_tab_train = prepare_tab.fit_transform(train)
     X_tab_valid = prepare_tab.transform(valid)
@@ -85,7 +85,7 @@ else:
         embed_cols=cat_embed_cols,
         continuous_cols=num_cols,
         for_tabtransformer=True,
-        scale=False,
+        scale=True,
     )
     X_tab_train = prepare_tab.fit_transform(train)
     X_tab_valid = prepare_tab.transform(valid)
@@ -100,9 +100,9 @@ else:
 
 if args.mlp_hidden_dims == "same":
     mlp_hidden_dims = [
-        len(cat_embed_cols) * args.input_dim,
-        len(cat_embed_cols) * args.input_dim,
-        (len(cat_embed_cols) * args.input_dim) // 2,
+        len(cat_embed_cols) * args.input_dim + len(num_cols),
+        len(cat_embed_cols) * args.input_dim + len(num_cols),
+        (len(cat_embed_cols) * args.input_dim + len(num_cols)) // 2,
     ]
 elif args.mlp_hidden_dims == "None":
     mlp_hidden_dims = None
