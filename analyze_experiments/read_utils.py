@@ -7,7 +7,7 @@ from typing import List
 
 import numpy as np
 import pandas as pd
-from constants import *  # noqa: F403
+from constants import *  # noqa: F401, F403
 
 sys.path.append(
     os.path.abspath("/home/ubuntu/Projects/tabulardl-benchmark/run_experiments")
