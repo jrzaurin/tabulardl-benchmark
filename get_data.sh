@@ -17,18 +17,6 @@ mv bank-additional/* .
 rm -r -f bank-additional/
 cd ~/Projects/tabulardl-benchmark/
 
-kaggle datasets download -d janiobachmann/bank-marketing-dataset
-mkdir raw_data/bank_marketing_kaggle
-mv bank-marketing-dataset.zip raw_data/bank_marketing_kaggle
-cd raw_data/bank_marketing_kaggle
-unzip bank-marketing-dataset.zip
-cd ~/Projects/tabulardl-benchmark/
-
-# Airbnb listings
-wget http://data.insideairbnb.com/united-kingdom/england/london/2021-02-09/data/listings.csv.gz
-mkdir raw_data/airbnb
-mv listings.csv.gz raw_data/airbnb
-
 # NYC Taxi Trip Duration
 # I manually downloaded train_extended.csv from here:
 # https://www.kaggle.com/neomatrix369/nyc-taxi-trip-duration-extended
@@ -37,14 +25,6 @@ mkdir raw_data/nyc_taxi
 mv nyc-taxi-trip-duration.zip raw_data/nyc_taxi
 cd raw_data/nyc_taxi
 unzip nyc-taxi-trip-duration.zip
-cd ~/Projects/tabulardl-benchmark/
-
-# Forest Cover
-wget https://archive.ics.uci.edu/ml/machine-learning-databases/covtype/covtype.data.gz
-mkdir raw_data/covertype
-mv covtype.data.gz raw_data/covertype
-cd raw_data/covertype
-gunzip covtype.data.gz
 cd ~/Projects/tabulardl-benchmark/
 
 # Facebook Volume
