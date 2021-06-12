@@ -1,4 +1,4 @@
-n_steps,step_dim,attn_dim,ghost_bn,virtual_batch_size,momentum,gamma,dropout,embed_dropout,lr,batch_size,weight_decay,lambda_sparse,optimizer,lr_scheduler,base_lr,max_lr,div_factor,final_div_factor,n_cycles,val_loss
+n_steps,step_dim,attn_dim,ghost_bn,virtual_batch_size,momentum,gamma,dropout,embed_dropout,lr,batch_size,weight_decay,lambda_sparse,optimizer,lr_scheduler,base_lr,max_lr,div_factor,final_div_factor,n_cycles,val_loss_or_metric
 5,8,8,False,128,0.75,1.5,0.0,0.0,0.01,1024,0.0,0.0001,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5,144819.1189732143
 5,8,8,False,128,0.98,1.5,0.0,0.0,0.01,1024,0.0,0.0001,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5,146057.80775669642
 5,8,8,False,128,0.5,1.5,0.0,0.0,0.01,1024,0.0,0.0001,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5,146201.3771205357

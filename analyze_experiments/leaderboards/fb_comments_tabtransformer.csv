@@ -1,4 +1,4 @@
-embed_dropout,full_embed_dropout,shared_embed,add_shared_embed,frac_shared_embed,input_dim,n_heads,n_blocks,dropout,ff_hidden_dim,transformer_activation,mlp_hidden_dims,mlp_activation,mlp_batchnorm,mlp_batchnorm_last,mlp_linear_first,with_wide,lr,batch_size,weight_decay,optimizer,lr_scheduler,base_lr,max_lr,div_factor,final_div_factor,n_cycles,val_loss
+embed_dropout,full_embed_dropout,shared_embed,add_shared_embed,frac_shared_embed,input_dim,n_heads,n_blocks,dropout,ff_hidden_dim,transformer_activation,mlp_hidden_dims,mlp_activation,mlp_batchnorm,mlp_batchnorm_last,mlp_linear_first,with_wide,lr,batch_size,weight_decay,optimizer,lr_scheduler,base_lr,max_lr,div_factor,final_div_factor,n_cycles,val_loss_or_metric
 0.0,False,False,False,8,16,2,4,0.1,,relu,None,relu,False,False,False,False,0.0005,1024,0.0,Adam,CyclicLR,0.0005,0.01,25,10000.0,10.0,33.0946249961853
 0.0,False,False,False,8,16,2,4,0.1,,relu,None,relu,False,False,False,False,0.0005,4096,0.0,AdamW,OneCycleLR,0.001,0.01,25,1000.0,5.0,33.12831687927246
 0.0,False,False,False,8,16,2,4,0.1,,relu,None,relu,False,False,False,False,0.001,1024,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,33.217492294311526
@@ -36,6 +36,6 @@ embed_dropout,full_embed_dropout,shared_embed,add_shared_embed,frac_shared_embed
 0.0,False,False,False,8,16,2,4,0.2,,relu,None,relu,False,False,False,False,0.001,4096,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,36.13614349365234
 0.0,False,False,False,8,32,4,6,0.2,,relu,None,relu,False,False,False,False,0.001,1024,0.0,Adam,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,36.15174312591553
 0.0,False,False,False,8,32,4,4,0.2,,relu,None,relu,False,False,False,False,0.001,4096,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,36.2059829711914
-0.0,False,False,False,8,32,8,4,0.2,,relu,None,relu,False,False,False,False,0.001,4096,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,36.344017791748044
+0.0,False,False,False,8,32,8,4,0.2,,relu,None,relu,False,False,False,False,0.001,4096,0.0,AdamW,ReduceLROnPlateau,0.001,0.01,25,10000.0,5.0,36.34401779174805
 0.0,False,False,False,8,16,2,4,0.1,,relu,None,relu,False,False,False,False,0.0005,1024,0.0,Adam,OneCycleLR,0.001,0.05,25,1000.0,5.0,78.02734451293945
-0.0,False,False,False,8,16,2,4,0.1,,relu,None,relu,False,False,False,False,0.0005,1024,0.0,Adam,OneCycleLR,0.001,0.05,25,1000.0,5.0,101.65013675689697
+0.0,False,False,False,8,16,2,4,0.1,,relu,None,relu,False,False,False,False,0.0005,1024,0.0,Adam,OneCycleLR,0.001,0.05,25,1000.0,5.0,101.65013675689696
